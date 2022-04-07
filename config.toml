@@ -1,0 +1,16 @@
+[logging]
+# The level of logging to perform.
+LOG_LEVEL = "debug"
+# The file holding error logs. Leave this empty to not store the logs in a file.
+ERROR_FILE = ""
+# The file holding the logs. Leave this empty to not store the logs in a file.
+LOG_FILE = ""
+
+[server]
+# The port the server will listen on.
+port = 8080
+# The origins that CORS requests can come from.
+hosts = [
+  "http://localhost:8000",
+  "http://localhost:8080",
+]
