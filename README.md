@@ -16,6 +16,10 @@ npm start
 
 This will start a server that listens on the port set in the configuration file _config.toml_, which is 8080 by default.
 
+## Structure
+
+The endpoint handlers are defined in _src/rest/handlers.ts_. They are mapped to the server in _src/rest/index.ts_ via the function `_makeApi1`.
+
 ## Logging
 
 Logging is performed using the Winston library. The location of the log files is specified in the configuration file under the `[logging]` section. The log files are separated into two - one stores all the logs and one stores only errors.

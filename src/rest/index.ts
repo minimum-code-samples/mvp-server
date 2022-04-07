@@ -6,6 +6,8 @@
 import cors from "cors";
 import express from "express";
 
+import * as handlers from "./handlers";
+
 import { logger as lg } from "../logger";
 
 const DELETE = "delete";
@@ -60,7 +62,45 @@ export async function startServer(configServer: ConfigServer) {
     res.send("Server is running");
   });
 
+  app.use("/v1", _makeApi1());
+
   app.listen(configServer.port, () => {
     lg.info(`Server started.`);
   });
+}
+
+function _makeApi1(): express.Router {
+  const router = express.Router();
+  router.use(
+    express.json({
+      limit: "1mb",
+    })
+  );
+
+  const mappings = [
+    {
+      path: "/echo",
+      verb: POST,
+      handlers: [handlers.echo],
+    },
+  ];
+
+  for (const m of mappings) {
+    let handles = [...m.handlers];
+    switch (m.verb) {
+      case DELETE:
+        router.route(m.path).delete(handles);
+        break;
+      case GET:
+        router.route(m.path).get(handles);
+        break;
+      case POST:
+        router.route(m.path).post(handles);
+        break;
+      case PUT:
+        router.route(m.path).put(handles);
+        break;
+    }
+  }
+  return router;
 }
