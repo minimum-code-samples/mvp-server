@@ -4,7 +4,7 @@
  * @module logger
  */
 
-import * as winston from "winston";
+import * as winston from 'winston';
 
 import {
   CONFIG_FILE,
@@ -12,7 +12,7 @@ import {
   LOG_FILE,
   LOG_LEVEL,
   LOG_LEVEL_VALUE,
-} from "../constants";
+} from '../constants';
 
 export let logger: winston.Logger;
 
@@ -25,10 +25,10 @@ const logFormat = winston.format.combine(
   )
 );
 
-const subfolder = "logs/";
-let errFile = "";
-let logFile = "";
-let logLevel = "";
+const subfolder = 'logs/';
+let errFile = '';
+let logFile = '';
+let logLevel = '';
 
 export function init(logging: {
   ERROR_FILE: string;
@@ -42,7 +42,7 @@ export function init(logging: {
 
   if (!logging) {
     console.error(
-      "Cannot initiatiate logger - configuration file does not specify logging parameters."
+      'Cannot initiatiate logger - configuration file does not specify logging parameters.'
     );
     process.exit(1);
   }
@@ -84,7 +84,7 @@ export function init(logging: {
     transports.push(
       new winston.transports.File({
         filename: subfolder + errFile,
-        level: "error",
+        level: 'error',
       })
     );
   }

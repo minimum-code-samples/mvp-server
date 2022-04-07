@@ -3,10 +3,10 @@
  *
  * @module cmd/functions
  */
-import fs from "fs";
-import toml from "toml";
+import fs from 'fs';
+import toml from 'toml';
 
-import { API_KEY } from "../constants";
+import { API_KEY } from '../constants';
 
 export let config: any | null;
 
@@ -36,8 +36,8 @@ export async function readConfig(file: string) {
 
   try {
     raw = fs.readFileSync(file, {
-      encoding: "utf-8",
-      flag: "r",
+      encoding: 'utf-8',
+      flag: 'r',
     });
   } catch (err) {
     console.error(`"${file}" not found. Exiting now.`);

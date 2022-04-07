@@ -3,17 +3,17 @@
  * @module rest
  */
 
-import cors from "cors";
-import express from "express";
+import cors from 'cors';
+import express from 'express';
 
-import * as handlers from "./handlers";
+import * as handlers from './handlers';
 
-import { logger as lg } from "../logger";
+import { logger as lg } from '../logger';
 
-const DELETE = "delete";
-const GET = "get";
-const POST = "post";
-const PUT = "put";
+const DELETE = 'delete';
+const GET = 'get';
+const POST = 'post';
+const PUT = 'put';
 
 type ConfigServer = {
   hosts: string[];
@@ -39,7 +39,7 @@ export async function startServer(configServer: ConfigServer) {
         callback(
           new Error(
             `CORS protection in place. Accepted domains: ${whitelist.join(
-              ", "
+              ', '
             )}`
           )
         );
@@ -51,18 +51,18 @@ export async function startServer(configServer: ConfigServer) {
   // Allow JSON requests.
   app.use(
     express.json({
-      limit: "1mb",
+      limit: '1mb',
     })
   );
   // Enable serving of static assets.
-  app.use(express.static("static"));
+  app.use(express.static('static'));
 
   // Page to show that the server is running.
-  app.get("/", (req: express.Request, res: express.Response) => {
-    res.send("Server is running");
+  app.get('/', (req: express.Request, res: express.Response) => {
+    res.send('Server is running');
   });
 
-  app.use("/v1", _makeApi1());
+  app.use('/v1', _makeApi1());
 
   app.listen(configServer.port, () => {
     lg.info(`Server started.`);
@@ -73,13 +73,13 @@ function _makeApi1(): express.Router {
   const router = express.Router();
   router.use(
     express.json({
-      limit: "1mb",
+      limit: '1mb',
     })
   );
 
   const mappings = [
     {
-      path: "/echo",
+      path: '/echo',
       verb: POST,
       handlers: [handlers.echo],
     },
